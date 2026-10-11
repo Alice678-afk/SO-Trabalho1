@@ -45,9 +45,19 @@ if [[ -z $modo && ! -f "$ficheiro_bd" ]]; then
    uso
 fi
 
-while IFS='|' read -r caminho user grupo tamanho permissoes data sha256; do
-    echo "$caminho e $sha256"
-done < $ficheiro_bd
+apagados=0
+
+if [[ $modo == "v" ]]; then
+ while IFS='|' read -r caminho user grupo tamanho permissoes data sha256; do
+  if [[ ! -e "$caminho" ]]; then
+     echo "$caminho foi APAGADO"
+     echo "  Informação inicial: USER=$user, GROUP=$grupo, SIZE=$tamanho, PERM=$permissoes, SHA256=$sha256"
+     apagados=$((apagados + 1))
+  fi
+ done < "$ficheiro_bd"
+ echo "Apagados: $apagados"
+ 
+fi
 
 # Só para testar
 echo "modo=$modo bd=$ficheiro_bd logger=$usar_logger"

@@ -45,7 +45,19 @@ Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
 
 ./vp_p2.sh -v -f /tmp/bd_teste -> /tmp/a.txt e aaaa1111 /tmp/b.txt e bbbb2222 modo=v bd=/tmp/bd_teste logger=0 (OK)
 
-
+ ./vp_p2.sh -v -f /tmp/bd_teste -> /tmp/a.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+Apagados: 2
+modo=v bd=/tmp/bd_teste logger=0
+ (OK)
+ 
+./vp_p2.sh -v -f /tmp/bd_teste -> /tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+Apagados: 1
+modo=v bd=/tmp/bd_teste logger=0
+(OK)
  
  
  
