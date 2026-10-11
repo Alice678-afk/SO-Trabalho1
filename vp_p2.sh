@@ -45,5 +45,9 @@ if [[ -z $modo && ! -f "$ficheiro_bd" ]]; then
    uso
 fi
 
+while IFS='|' read -r caminho user grupo tamanho permissoes data sha256; do
+    echo "$caminho e $sha256"
+done < $ficheiro_bd
+
 # Só para testar
 echo "modo=$modo bd=$ficheiro_bd logger=$usar_logger"

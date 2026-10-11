@@ -43,6 +43,9 @@ Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
 
 ./vp_p2.sh -v -f /tmp/nao_existe  ->  erro + uso (OK)
 
+./vp_p2.sh -v -f /tmp/bd_teste -> /tmp/a.txt e aaaa1111 /tmp/b.txt e bbbb2222 modo=v bd=/tmp/bd_teste logger=0 (OK)
+
+
  
  
  
