@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Valores por defeito (definidos ANTES de ler as opções)
 modo=""
 ficheiro_bd="/tmp/.pdb"
 usar_logger=0
@@ -18,11 +17,15 @@ uso() {
     exit 1
 }
 
+flag_p=0
+flag_v=0
 
 while getopts "pvf:s" opcao; do
     case $opcao in
-        p) modo="p" ;;
-        v) modo="v" ;;
+        p) modo="p"
+           flag_p=1 ;;
+        v) modo="v"
+           flag_v=1 ;;
         f) ficheiro_bd="$OPTARG" ;;
         s) usar_logger=1 ;;
         *) echo "Opção inválida" >&2
@@ -30,5 +33,10 @@ while getopts "pvf:s" opcao; do
     esac
 done
 
-# Só para testar (depois removes)
+if [[ $flag_p == 1 && $flag_v == 1 ]]; then
+   echo "Erro: não podes usar -p e -v ao mesmo tempo" >&2
+   uso
+fi
+
+# Só para testar
 echo "modo=$modo bd=$ficheiro_bd logger=$usar_logger"
