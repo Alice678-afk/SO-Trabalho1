@@ -38,5 +38,12 @@ if [[ $flag_p == 1 && $flag_v == 1 ]]; then
    uso
 fi
 
+if [[ -z $modo && ! -f "$ficheiro_bd" ]]; then
+
+   modo="v"
+   echo "Erro: base de dados '$ficheiro_bd' não encontrada" >&2
+   uso
+fi
+
 # Só para testar
 echo "modo=$modo bd=$ficheiro_bd logger=$usar_logger"

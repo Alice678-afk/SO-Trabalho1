@@ -16,9 +16,32 @@ Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
     -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
  /tmp/*) da proteção e verificação
     -s : Emissão de alertas de alta prioridade para o sistema de logging
- usando o logger (OK)
+ usando o logger 
+ (OK)
  
+ *depois de acrescentar mensagem de erro caso o utilizador ponha dois comandos ao mesmo tempo -p e -v*
  
+./vp_p2.sh -p -v      ->  erro + uso (OK)
+
+./vp_p2.sh -v -p      ->  erro + uso (OK)
+
+./vp_p2.sh -p         ->  modo=p bd=/tmp/.pdb logger=0 (OK)
+
+./vp_p2.sh -v         ->  modo=v bd=/tmp/.pdb logger=0 (OK)
+
+./vp_p2.sh            ->  adrianamoranguita@moranguinho:~/SO/trabalho1$ ./vp_p2.sh
+Erro: base de dados '/tmp/.pdb' não encontrada
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
+ (OK)
+
+./vp_p2.sh -v -f /tmp/nao_existe  ->  erro + uso (OK)
 
  
  
