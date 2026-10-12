@@ -88,6 +88,16 @@ Apagados: 1
 modo=v bd=bd_teste logger=0
  (OK)
 
+./vp_p2.sh -v -f bd_teste ->
+
+/tmp/a.txt foi MODIFICADO (Conteúdo).
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+Apagados: 1
+Modificados: 1
+modo=v bd=bd_teste logger=0
+ (OK)
+
 
 
  

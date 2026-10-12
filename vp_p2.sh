@@ -48,6 +48,7 @@ if [[ ! -f "$ficheiro_bd" ]]; then
 fi
 
 apagados=0
+modificados=0
 
 if [[ $modo == "v" ]]; then
  while IFS='|' read -r caminho user grupo tamanho permissoes data sha256; do
@@ -58,11 +59,18 @@ if [[ $modo == "v" ]]; then
   
   else 
    sha256_atual=$(sha256sum "$caminho" | awk '{print $1}')
-   echo "$caminho -> $sha256_atual"
-  
+   
+   if [[ "$sha256_atual" != "$sha256" ]]; then
+     
+     echo "$caminho foi MODIFICADO (Conteúdo)".
+     modificados=$((modificados + 1))
+   
+   fi
+   
   fi
  done < "$ficheiro_bd"
  echo "Apagados: $apagados"
+ echo "Modificados: $modificados"
  
 fi
 	
