@@ -58,6 +58,38 @@ modo=v bd=/tmp/bd_teste logger=0
 Apagados: 1
 modo=v bd=/tmp/bd_teste logger=0
 (OK)
+
+./vp_p2.sh -v -f nao_existe -> Erro: base de dados 'nao_existe' não encontrada
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
+ (OK)
+ 
+./vp_p2.sh -f nao_existe ->
+ Erro: base de dados 'nao_existe' não encontrada
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
+ 
+./vp_p2.sh -v -f bd_teste -> /tmp/a.txt -> ae5e34f70239c2d2634ec7780f38d526a797a2b0095b1128cb4a066b0be110c1
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+Apagados: 1
+modo=v bd=bd_teste logger=0
+ (OK)
+
+
+
  
  
  

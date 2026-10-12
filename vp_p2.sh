@@ -38,11 +38,13 @@ if [[ $flag_p == 1 && $flag_v == 1 ]]; then
    uso
 fi
 
-if [[ -z $modo && ! -f "$ficheiro_bd" ]]; then
+if [[ -z $modo ]]; then
+    modo="v"
+fi
 
-   modo="v"
-   echo "Erro: base de dados '$ficheiro_bd' não encontrada" >&2
-   uso
+if [[ ! -f "$ficheiro_bd" ]]; then
+    echo "Erro: base de dados '$ficheiro_bd' não encontrada" >&2
+    uso
 fi
 
 apagados=0
@@ -53,11 +55,17 @@ if [[ $modo == "v" ]]; then
      echo "$caminho foi APAGADO"
      echo "  Informação inicial: USER=$user, GROUP=$grupo, SIZE=$tamanho, PERM=$permissoes, SHA256=$sha256"
      apagados=$((apagados + 1))
+  
+  else 
+   sha256_atual=$(sha256sum "$caminho" | awk '{print $1}')
+   echo "$caminho -> $sha256_atual"
+  
   fi
  done < "$ficheiro_bd"
  echo "Apagados: $apagados"
  
 fi
+	
 
 # Só para testar
 echo "modo=$modo bd=$ficheiro_bd logger=$usar_logger"
