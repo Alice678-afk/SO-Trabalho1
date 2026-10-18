@@ -42,7 +42,7 @@ if [[ -z $modo ]]; then
     modo="v"
 fi
 
-if [[ ! -f "$ficheiro_bd" ]]; then
+if [[ $modo == "v" && ! -f "$ficheiro_bd" ]]; then
     echo "Erro: base de dados '$ficheiro_bd' não encontrada" >&2
     uso
 fi
@@ -62,7 +62,7 @@ if [[ $modo == "v" ]]; then
    
    if [[ "$sha256_atual" != "$sha256" ]]; then
      
-     echo "$caminho foi MODIFICADO (Conteúdo)".
+     echo "$caminho foi MODIFICADO (Conteúdo)"
      modificados=$((modificados + 1))
    
    fi
