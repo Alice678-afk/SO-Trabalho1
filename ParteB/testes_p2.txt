@@ -315,5 +315,20 @@ Oct 18 23:30:38 moranguinho vp[31253]: /tmp/amb/f2.txt é NOVO
 Oct 18 23:30:38 moranguinho vp[31255]: /tmp/amb/f1.txt é NOVO
 adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ 
 
+adrianamoranguita@moranguinho:~/SO/trabalho1$ cd ParteB
+echo "#DIRS /tmp/amb" > bd_teste2
+cat bd_teste >> bd_teste2
+./vp_p2.sh -v -f bd_teste2
+/tmp/a.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+/tmp/amb/f2.txt é NOVO
+/tmp/amb/f1.txt é NOVO
+Resumo da Verificação: 2 verificados | 0 Modificados | 2 Apagados | 2 Novos
+modo=v bd=bd_teste2 logger=0
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ grep -n "continue" vp_p2.sh
+65:    continue
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ 
 
  

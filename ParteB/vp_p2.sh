@@ -60,6 +60,11 @@ novos=0
 
 if [[ $modo == "v" ]]; then
  while IFS='|' read -r caminho user grupo tamanho permissoes data sha256; do
+  
+    if [[ "$caminho" == "#"* ]]; then
+    continue
+  fi
+  
   verificados=$((verificados + 1))
   if [[ ! -e "$caminho" ]]; then
   
