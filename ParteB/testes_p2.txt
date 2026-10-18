@@ -148,6 +148,38 @@ Apagados: 1
 Modificados: 1
 modo=v bd=bd_teste logger=0
  (OK)
+ 
+ == 7. Várias alterações numa só mensagem ==
+Explicação: cada campo diferente acrescenta o seu nome à variável "alteracoes";
+no fim, uma só mensagem MODIFICADO com tudo o que mudou, e o contador soma 1 por ficheiro.
+./vp_p2.sh -v -f bd_teste  -> a.txt MODIFICADO (Conteúdo Tamanho), Modificados: 1 | obtido: ... | OK/ERRO
+
+== 8. Informação inicial e atual nos modificados ==
+Explicação: por baixo de cada MODIFICADO, uma linha com os valores da BD (antes)
+e outra com os valores lidos agora pelo stat e sha256sum (depois).
+./vp_p2.sh -v -f bd_teste  -> por baixo do a.txt, "Informação inicial" (USER=adriana, SIZE=120, PERM=644...)
+                              e "Informação atual" (valores reais do ficheiro) | obtido: ... | OK/ERRO
+
+== 9. Deteção de cada campo ==
+Explicação: um if por campo compara o valor da BD com o atual. Se for diferente,
+acrescenta a palavra (Conteúdo, Tamanho, Permissões, Data, Posse) à lista.
+O da posse junta dono e grupo com || ("ou").
+./vp_p2.sh -v -f bd_teste  -> a.txt MODIFICADO (Alteração de: Conteúdo Tamanho Permissões Data Posse),
+                              porque todos os valores da BD de teste são diferentes dos reais | obtido: ... | OK/ERRO
+
+== 10. Cada campo só aparece quando mudou (teste inverso) ==
+Explicação: em cada teste, corrige na bd_teste UM campo do a.txt para o valor real
+e confirma que ESSE campo desaparece da mensagem e os outros ficam.
+(valores reais: tamanho 4, permissões 664, dono e grupo adrianamoranguita)
+tamanho 120 -> 4              -> "Tamanho" desaparece | obtido: ... | OK/ERRO
+permissões 644 -> 664         -> "Permissões" desaparece | obtido: ... | OK/ERRO
+dono e grupo -> reais         -> "Posse" desaparece | obtido: ... | OK/ERRO
+data -> stat -c %Y /tmp/a.txt -> "Data" desaparece | obtido: ... | OK/ERRO
+hash -> sha256sum /tmp/a.txt  -> "Conteúdo" desaparece | obtido: ... | OK/ERRO
+
+== 11. Nenhuma alteração ==
+Explicação: com todos os campos da BD iguais aos reais, o ficheiro não é reportado.
+bd_teste com os 5 campos reais -> a.txt NÃO aparece, "Modificados: 0" | obtido: ... | OK/ERRO
 
 
  

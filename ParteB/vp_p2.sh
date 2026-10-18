@@ -49,9 +49,11 @@ fi
 
 apagados=0
 modificados=0
+verificados=0
 
 if [[ $modo == "v" ]]; then
  while IFS='|' read -r caminho user grupo tamanho permissoes data sha256; do
+  verificados=$((verificados + 1))
   if [[ ! -e "$caminho" ]]; then
      echo "$caminho foi APAGADO"
      echo "  Informação inicial: USER=$user, GROUP=$grupo, SIZE=$tamanho, PERM=$permissoes, SHA256=$sha256"
@@ -74,10 +76,26 @@ if [[ $modo == "v" ]]; then
    if [[ "$tamanho" != "$tamanho_atual" ]]; then
     alteracoes="$alteracoes Tamanho"
    fi
+   
+   if [[ "$permissoes" != "$perm_atual" ]]; then
+    alteracoes="$alteracoes Permissões"
+   fi
+   
+   if [[ "$data" != "$data_atual" ]]; then
+    alteracoes="$alteracoes Data"
+   fi
+   
+   if [[ "$user" != "$user_atual" || "$grupo" != "$grupo_atual" ]]; then
+    alteracoes="$alteracoes Posse"
+   fi
      
    if [[ -n "$alteracoes" ]]; then
-    echo "$caminho foi MODIFICADO (Alteração de: $alteracoes)"
+    echo "$caminho foi MODIFICADO (Alteração de:$alteracoes)"
     modificados=$((modificados + 1))
+    
+    echo "  Informação inicial: USER=$user, GROUP=$grupo, SIZE=$tamanho, PERM=$permissoes, SHA256=$sha256"
+    echo "  Informação atual: USER=$user_atual, GROUP=$grupo_atual,   SIZE=$tamanho_atual, PERM=$perm_atual, SHA256=$sha256_atual"
+    
    fi
    
   fi
