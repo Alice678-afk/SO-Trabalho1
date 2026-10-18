@@ -139,6 +139,17 @@ Explicação: o stat lê dono, grupo, tamanho, permissões e data de cada fichei
 Explicação: cada campo diferente acrescenta o seu nome a "alteracoes"; no fim uma só mensagem.
 ./vp_p2.sh -v -f bd_teste     -> a.txt MODIFICADO (Conteúdo Tamanho), Modificados: 1 | obtido: ...
 
+
+echo "ola" > /tmp/a.txt ./vp_p2.sh -v -f bd_teste ->
+/tmp/a.txt foi MODIFICADO (Alteração de:  Conteúdo Tamanho)
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+Apagados: 1
+Modificados: 1
+modo=v bd=bd_teste logger=0
+ (OK)
+
+
  
  
  

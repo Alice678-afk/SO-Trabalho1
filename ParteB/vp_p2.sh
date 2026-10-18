@@ -65,11 +65,19 @@ if [[ $modo == "v" ]]; then
    perm_atual=$(stat -c %a "$caminho")
    data_atual=$(stat -c %Y "$caminho")
    
-   if [[ "$sha256_atual" != "$sha256" ]]; then
-     
-     echo "$caminho foi MODIFICADO (Conteúdo)"
-     modificados=$((modificados + 1))
+   alteracoes=""
    
+   if [[ "$sha256_atual" != "$sha256" ]]; then
+    alteracoes="$alteracoes Conteúdo"
+   fi
+
+   if [[ "$tamanho" != "$tamanho_atual" ]]; then
+    alteracoes="$alteracoes Tamanho"
+   fi
+     
+   if [[ -n "$alteracoes" ]]; then
+    echo "$caminho foi MODIFICADO (Alteração de: $alteracoes)"
+    modificados=$((modificados + 1))
    fi
    
   fi
