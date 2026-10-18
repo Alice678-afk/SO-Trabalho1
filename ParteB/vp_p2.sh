@@ -56,6 +56,7 @@ fi
 apagados=0
 modificados=0
 verificados=0
+novos=0
 
 if [[ $modo == "v" ]]; then
  while IFS='|' read -r caminho user grupo tamanho permissoes data sha256; do
@@ -111,7 +112,18 @@ if [[ $modo == "v" ]]; then
    
   fi
  done < "$ficheiro_bd"
- echo "Resumo da Verificação: $verificados verificados | $modificados Modificados | $apagados Apagados"
+ 
+  dir_teste="/tmp/amb"
+
+ while IFS= read -r ficheiro; do
+  if ! grep -q -F "$ficheiro|" "$ficheiro_bd"; then
+   echo "$ficheiro é NOVO"
+   alerta "$ficheiro é NOVO"
+   novos=$((novos + 1))
+  fi
+ done < <(find "$dir_teste" -type f)
+ 
+ echo "Resumo da Verificação: $verificados verificados | $modificados Modificados | $apagados Apagados | $novos Novos"
  
  
 fi

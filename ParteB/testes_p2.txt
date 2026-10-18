@@ -193,3 +193,127 @@ modo=v bd=bd_teste logger=0
 
  (OK)
  
+ adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ mkdir -p /tmp/amb
+echo "x" > /tmp/amb/f1.txt
+echo "y" > /tmp/amb/f2.txt
+find /tmp/amb -type f
+/tmp/amb/f2.txt
+/tmp/amb/f1.txt
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ mkdir -p /tmp/amb
+echo "x" > /tmp/amb/f1.txt
+echo "y" > /tmp/amb/f2.txt
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste
+/tmp/a.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+Resumo da Verificação: 2 verificados | 0 Modificados | 2 Apagados
+modo=v bd=bd_teste logger=0
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste
+/tmp/a.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+Resumo da Verificação: 2 verificados | 0 Modificados | 2 Apagados
+modo=v bd=bd_teste logger=0
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ 
+
+bash: adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$: No such file or directory
+bash: /tmp/a.txt: No such file or directory
+Informação: command not found
+bash: /tmp/b.txt: No such file or directory
+Informação: command not found
+0: command not found
+2: command not found
+Resumo: command not found
+bash: adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$: No such file or directory
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste -s
+/tmp/a.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+Encontrei: /tmp/amb/f2.txt
+Encontrei: /tmp/amb/f1.txt
+Resumo da Verificação: 2 verificados | 0 Modificados | 2 Apagados
+modo=v bd=bd_teste logger=1
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste
+./vp_p2.sh: line 128: syntax error near unexpected token `fi'
+./vp_p2.sh: line 128: `fi'
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ sed -n '100,130p' vp_p2.sh
+     
+   if [[ -n "$alteracoes" ]]; then
+    echo "$caminho foi MODIFICADO (Alteração de:$alteracoes)"
+    alerta "$caminho foi MODIFICADO (Alteração de:$alteracoes)"
+    
+    modificados=$((modificados + 1))
+    
+    echo "  Informação inicial: USER=$user, GROUP=$grupo, SIZE=$tamanho, PERM=$permissoes, SHA256=$sha256"
+    echo "  Informação atual: USER=$user_atual, GROUP=$grupo_atual,   SIZE=$tamanho_atual, PERM=$perm_atual, SHA256=$sha256_atual"
+    
+   fi
+   
+  fi
+ done < "$ficheiro_bd"
+ 
+  dir_teste="/tmp/amb"
+
+ while IFS= read -r ficheiro; do
+   while IFS= read -r ficheiro; do
+  if ! grep -q -F "$ficheiro|" "$ficheiro_bd"; then
+   echo "$ficheiro é NOVO"
+   novos=$((novos + 1))
+  fi
+ done < <(find "$dir_teste" -type f)
+ 
+ echo "Resumo da Verificação: $verificados verificados | $modificados Modificados | $apagados Apagados | $novos Novos"
+ 
+ 
+fi
+	
+
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste
+/tmp/a.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+/tmp/amb/f2.txt é NOVO
+/tmp/amb/f1.txt é NOVO
+Resumo da Verificação: 2 verificados | 0 Modificados | 2 Apagados | 2 Novos
+modo=v bd=bd_teste logger=0
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste
+/tmp/a.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+/tmp/amb/f2.txt é NOVO
+/tmp/amb/f1.txt é NOVO
+Resumo da Verificação: 2 verificados | 0 Modificados | 2 Apagados | 2 Novos
+modo=v bd=bd_teste logger=0
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste
+/tmp/a.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+/tmp/amb/f2.txt é NOVO
+/tmp/amb/f1.txt é NOVO
+Resumo da Verificação: 2 verificados | 0 Modificados | 2 Apagados | 2 Novos
+modo=v bd=bd_teste logger=0
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste -s
+journalctl -t vp -n 5
+/tmp/a.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+/tmp/amb/f2.txt é NOVO
+/tmp/amb/f1.txt é NOVO
+Resumo da Verificação: 2 verificados | 0 Modificados | 2 Apagados | 2 Novos
+modo=v bd=bd_teste logger=1
+Oct 18 23:24:05 moranguinho vp[28483]: /tmp/b.txt foi APAGADO
+Oct 18 23:30:38 moranguinho vp[31249]: /tmp/a.txt foi APAGADO
+Oct 18 23:30:38 moranguinho vp[31250]: /tmp/b.txt foi APAGADO
+Oct 18 23:30:38 moranguinho vp[31253]: /tmp/amb/f2.txt é NOVO
+Oct 18 23:30:38 moranguinho vp[31255]: /tmp/amb/f1.txt é NOVO
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ 
+
+
+ 
