@@ -182,6 +182,14 @@ Explicação: com todos os campos da BD iguais aos reais, o ficheiro não é rep
 bd_teste com os 5 campos reais -> a.txt NÃO aparece, "Modificados: 0" | obtido: ... | OK/ERRO
 
 
- 
- 
+echo "ola" > /tmp/a.txt ./vp_p2.sh -v -f bd_teste ->
+/tmp/a.txt foi MODIFICADO (Alteração de: Conteúdo Tamanho Permissões Data Posse)
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+  Informação atual: USER=adrianamoranguita, GROUP=adrianamoranguita,   SIZE=4, PERM=664, SHA256=ae5e34f70239c2d2634ec7780f38d526a797a2b0095b1128cb4a066b0be110c1
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+Resumo da Verificação: 2 verificados | 1 Modificados | 1 Apagados
+modo=v bd=bd_teste logger=0
+
+ (OK)
  

@@ -100,8 +100,8 @@ if [[ $modo == "v" ]]; then
    
   fi
  done < "$ficheiro_bd"
- echo "Apagados: $apagados"
- echo "Modificados: $modificados"
+ echo "Resumo da Verificação: $verificados verificados | $modificados Modificados | $apagados Apagados"
+ 
  
 fi
 	
