@@ -59,6 +59,11 @@ if [[ $modo == "v" ]]; then
   
   else 
    sha256_atual=$(sha256sum "$caminho" | awk '{print $1}')
+   user_atual=$(stat -c %U "$caminho")
+   grupo_atual=$(stat -c %G "$caminho")
+   tamanho_atual=$(stat -c %s "$caminho")
+   perm_atual=$(stat -c %a "$caminho")
+   data_atual=$(stat -c %Y "$caminho")
    
    if [[ "$sha256_atual" != "$sha256" ]]; then
      
