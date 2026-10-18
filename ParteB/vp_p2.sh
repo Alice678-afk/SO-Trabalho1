@@ -17,6 +17,12 @@ uso() {
     exit 1
 }
 
+alerta() {
+  if [[ $usar_logger == 1 ]]; then
+    logger -t vp -p user.warning "$1"
+  fi
+}
+
 flag_p=0
 flag_v=0
 
@@ -55,7 +61,10 @@ if [[ $modo == "v" ]]; then
  while IFS='|' read -r caminho user grupo tamanho permissoes data sha256; do
   verificados=$((verificados + 1))
   if [[ ! -e "$caminho" ]]; then
+  
      echo "$caminho foi APAGADO"
+     alerta "$caminho foi APAGADO"
+     
      echo "  Informação inicial: USER=$user, GROUP=$grupo, SIZE=$tamanho, PERM=$permissoes, SHA256=$sha256"
      apagados=$((apagados + 1))
   
@@ -91,6 +100,8 @@ if [[ $modo == "v" ]]; then
      
    if [[ -n "$alteracoes" ]]; then
     echo "$caminho foi MODIFICADO (Alteração de:$alteracoes)"
+    alerta "$caminho foi MODIFICADO (Alteração de:$alteracoes)"
+    
     modificados=$((modificados + 1))
     
     echo "  Informação inicial: USER=$user, GROUP=$grupo, SIZE=$tamanho, PERM=$permissoes, SHA256=$sha256"
