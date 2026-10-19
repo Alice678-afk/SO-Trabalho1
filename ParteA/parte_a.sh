@@ -12,8 +12,8 @@ gerar_base_dados() {
     > "$ficheiro_bd"
     
     #adicionar os diretórios protegidos
-    echo "$@" >> "$ficheiro_bd"
-    echo "$padrao_exclusao" >> "$ficheiro_bd"
+    echo "#DIRS $@" >> "$ficheiro_bd"
+    echo "#EXCLUIR $padrao_exclusao" >> "$ficheiro_bd"
     
 
     for dir in "$@"; do
