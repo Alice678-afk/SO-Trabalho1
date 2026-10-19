@@ -508,4 +508,19 @@ Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
  /tmp/*) da proteção e verificação
     -s : Emissão de alertas de alta prioridade para o sistema de logging
  usando o logger
-
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p /tmp/amb -e "*.log"
+modo=p bd=/tmp/.pdb logger=0 dirs= /tmp/amb exclui=*.log
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p /tmp/amb -f minha_bd -e "*.tmp" -s
+modo=p bd=minha_bd logger=1 dirs= /tmp/amb exclui=*.tmp
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -e
+./vp_p2.sh: option requires an argument -- e
+Opção inválida
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
+adrianamoranguita

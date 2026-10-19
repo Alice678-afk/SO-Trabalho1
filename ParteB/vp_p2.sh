@@ -26,16 +26,18 @@ alerta() {
 flag_p=0
 flag_v=0
 dirs_protegidos=""
+padrao_excluir=""
 
 while [[ $# -gt 0 ]]; do
     OPTIND=1
-    while getopts "pvf:s" opcao; do
+    while getopts "pvf:e:s" opcao; do
         case $opcao in
             p) modo="p"
                flag_p=1 ;;
             v) modo="v"
                flag_v=1 ;;
             f) ficheiro_bd="$OPTARG" ;;
+            e) padrao_excluir="$OPTARG" ;;
             s) usar_logger=1 ;;
             *) echo "Opção inválida" >&2
                uso ;;
@@ -155,4 +157,4 @@ fi
 	
 
 # Só para testar
-echo "modo=$modo bd=$ficheiro_bd logger=$usar_logger"
+echo "modo=$modo bd=$ficheiro_bd logger=$usar_logger dirs=$dirs_protegidos exclui=$padrao_excluir"
