@@ -25,18 +25,28 @@ alerta() {
 
 flag_p=0
 flag_v=0
+dirs_protegidos=""
 
-while getopts "pvf:s" opcao; do
-    case $opcao in
-        p) modo="p"
-           flag_p=1 ;;
-        v) modo="v"
-           flag_v=1 ;;
-        f) ficheiro_bd="$OPTARG" ;;
-        s) usar_logger=1 ;;
-        *) echo "Opção inválida" >&2
-           uso ;;
-    esac
+while [[ $# -gt 0 ]]; do
+    OPTIND=1
+    while getopts "pvf:s" opcao; do
+        case $opcao in
+            p) modo="p"
+               flag_p=1 ;;
+            v) modo="v"
+               flag_v=1 ;;
+            f) ficheiro_bd="$OPTARG" ;;
+            s) usar_logger=1 ;;
+            *) echo "Opção inválida" >&2
+               uso ;;
+        esac
+    done
+    shift $((OPTIND - 1))
+
+    if [[ $# -gt 0 ]]; then
+        dirs_protegidos="$dirs_protegidos $1"
+        shift
+    fi
 done
 
 shift $((OPTIND - 1))
@@ -46,7 +56,7 @@ if [[ $flag_p == 1 && $flag_v == 1 ]]; then
    uso
 fi
 
-if [[ $flag_p == 1  && $# -eq 0 ]]; then
+if [[ $flag_p == 1 && -z "$dirs_protegidos" ]]; then
  echo "Erro: o -p precisa de pelo menos um diretório" >&2
  uso
 fi
@@ -73,6 +83,7 @@ if [[ $modo == "v" ]]; then
   fi
   
   verificados=$((verificados + 1))
+  
   if [[ ! -e "$caminho" ]]; then
   
      echo "$caminho foi APAGADO"

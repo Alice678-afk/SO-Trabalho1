@@ -331,4 +331,181 @@ adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ grep -n "continue" vp_p2.sh
 65:    continue
 adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ 
 
- 
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste2     ->  2 Novos (a bd_teste2 tem a linha #DIRS /tmp/amb)
+bash: syntax error near unexpected token `('
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste2
+./vp_p2.sh: line 140: unexpected EOF while looking for matching `"'
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste2
+/tmp/a.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+find: ‘/tmp/amb’: No such file or directory
+Resumo da Verificação: 2 verificados | 0 Modificados | 2 Apagados | 0 Novos
+modo=v bd=bd_teste2 logger=0
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste 
+/tmp/a.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+Resumo da Verificação: 2 verificados | 0 Modificados | 2 Apagados | 0 Novos
+modo=v bd=bd_teste logger=0
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ mkdir -p /tmp/amb
+echo "x" > /tmp/amb/f1.txt
+echo "y" > /tmp/amb/f2.txt
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste2
+/tmp/a.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+/tmp/amb/f2.txt é NOVO
+/tmp/amb/f1.txt é NOVO
+Resumo da Verificação: 2 verificados | 0 Modificados | 2 Apagados | 2 Novos
+modo=v bd=bd_teste2 logger=0
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p 
+Erro: o -p precisa de pelo menos um diretório
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p /tmp/amb 
+modo=p bd=/tmp/.pdb logger=0
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste
+/tmp/a.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+Resumo da Verificação: 2 verificados | 0 Modificados | 2 Apagados | 0 Novos
+modo=v bd=bd_teste logger=0
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp -p /etc /home/jjcf -f /tmp/.pdb_5_oct_2026 -e "*.log"
+bash: ./vp: No such file or directory
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p /tmp/amb -f minha_bd
+modo=p bd=/tmp/.pdb logger=0
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ git pull
+Already up to date.
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ git add .
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ git commit -m "erro -p"
+[main 804767f] erro -p
+ 1 file changed, 16 insertions(+), 7 deletions(-)
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 633 bytes | 633.00 KiB/s, done.
+Total 4 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/Alice678-afk/SO-Trabalho1.git
+   643d70e..804767f  main -> main
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   vp_p2.sh
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	../bd_teste2
+
+no changes added to commit (use "git add" and/or "git commit -a")
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p /tmp/amb -f minha_bd
+./vp_p2.sh -p /tmp/amb /tmp -s -f x
+./vp_p2.sh -p
+./vp_p2.sh -v -f bd_teste
+./vp_p2.sh: line 33: syntax error near unexpected token `newline'
+./vp_p2.sh: line 33: `            dirs_protegido=$((dirs_protegido + 1)) '
+./vp_p2.sh: line 33: syntax error near unexpected token `newline'
+./vp_p2.sh: line 33: `            dirs_protegido=$((dirs_protegido + 1)) '
+./vp_p2.sh: line 33: syntax error near unexpected token `newline'
+./vp_p2.sh: line 33: `            dirs_protegido=$((dirs_protegido + 1)) '
+./vp_p2.sh: line 33: syntax error near unexpected token `newline'
+./vp_p2.sh: line 33: `            dirs_protegido=$((dirs_protegido + 1)) '
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p /tmp/amb -f minha_bd
+./vp_p2.sh: line 33: syntax error near unexpected token `newline'
+./vp_p2.sh: line 33: `            dirs_protegido="$dirs_protegido $1"'
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ sed -n '22,45p' vp_p2.sh
+    logger -t vp -p user.warning "$1"
+  fi
+}
+
+flag_p=0
+flag_v=0
+
+while [[ $# -gt 0 ]]; do
+ OPTIND=1
+    while getopts "pvf:s" opcao; do
+        case $opcao in
+            dirs_protegido="$dirs_protegido $1"
+        esac
+    done
+    shift $((OPTIND - 1))
+
+    if [[ $# -gt 0 ]]; then
+        shift
+    fi
+done
+
+shift $((OPTIND - 1))
+
+if [[ $flag_p == 1 && $flag_v == 1 ]]; then
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p /tmp/amb -f minha_bd
+Erro: o -p precisa de pelo menos um diretório
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p /tmp/amb /tmp -s -f x
+Erro: o -p precisa de pelo menos um diretório
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p
+Erro: o -p precisa de pelo menos um diretório
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_teste
+/tmp/a.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=120, PERM=644, SHA256=aaaa1111
+/tmp/b.txt foi APAGADO
+  Informação inicial: USER=adriana, GROUP=users, SIZE=45, PERM=755, SHA256=bbbb2222
+Resumo da Verificação: 2 verificados | 0 Modificados | 2 Apagados | 0 Novos
+modo=v bd=bd_teste logger=0
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ 
+
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p /tmp/amb -f minha_bd
+modo=p bd=minha_bd logger=0
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p /tmp/amb /tmp -s -f x
+modo=p bd=x logger=1
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p
+Erro: o -p precisa de pelo menos um diretório
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
+
