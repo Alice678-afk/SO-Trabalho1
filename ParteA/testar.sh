@@ -11,7 +11,7 @@ echo "Texto do segundo ficheiro" > "$DIRETORIO_TESTE/ficheiro2.txt"
 
 echo "testar a geração da base de dados"
 
-gerar_base_dados "$BD_TESTE" "$DIRETORIO_TESTE"
+gerar_base_dados "$BD_TESTE" "" "$DIRETORIO_TESTE"
 
 cat "$BD_TESTE"
 

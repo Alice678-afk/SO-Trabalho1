@@ -2,18 +2,30 @@
 
 gerar_base_dados() {
     local ficheiro_bd="$1"
-    shift
+    #adicionar o padrão e
+    local padrao_exclusao="$2" 
+    
+    shift 2
 
     [ $# -eq 0 ] && return 1
 
     > "$ficheiro_bd"
+    
+    #adicionar os diretórios protegidos
+    echo "$@" >> "$ficheiro_bd"
+    echo "$padrao_exclusao" >> "$ficheiro_bd"
+    
 
     for dir in "$@"; do
         [[ ! -d "$dir" ]] && continue
 
         while IFS= read -r ficheiro; do
             [[ ! -f "$ficheiro" ]] && continue
-
+            
+            if [[ -n "$padrao_exclusao" ]]; then
+                [[ "$ficheiro" == $padrao_exclusao ]] && continue
+            fi
+            
             local caminho="$ficheiro"
             local user=$(stat -c '%U' "$ficheiro" 2>/dev/null)
             local grupo=$(stat -c '%G' "$ficheiro" 2>/dev/null)
