@@ -39,9 +39,16 @@ while getopts "pvf:s" opcao; do
     esac
 done
 
+shift $((OPTIND - 1))
+
 if [[ $flag_p == 1 && $flag_v == 1 ]]; then
    echo "Erro: não podes usar -p e -v ao mesmo tempo" >&2
    uso
+fi
+
+if [[ $flag_p == 1  && $# -eq 0 ]]; then
+ echo "Erro: o -p precisa de pelo menos um diretório" >&2
+ uso
 fi
 
 if [[ -z $modo ]]; then
@@ -118,15 +125,17 @@ if [[ $modo == "v" ]]; then
   fi
  done < "$ficheiro_bd"
  
-  dir_teste="/tmp/amb"
+  dirs=$(grep '^#DIRS' "$ficheiro_bd" | cut -d' ' -f2-)
 
- while IFS= read -r ficheiro; do
-  if ! grep -q -F "$ficheiro|" "$ficheiro_bd"; then
-   echo "$ficheiro é NOVO"
-   alerta "$ficheiro é NOVO"
-   novos=$((novos + 1))
+  if [[ -n "$dirs" ]]; then
+   while IFS= read -r ficheiro; do
+    if ! grep -q -F "$ficheiro|" "$ficheiro_bd"; then
+     echo "$ficheiro é NOVO"
+     alerta "$ficheiro é NOVO"
+     novos=$((novos + 1))
+    fi
+   done < <(find $dirs -type f)
   fi
- done < <(find "$dir_teste" -type f)
  
  echo "Resumo da Verificação: $verificados verificados | $modificados Modificados | $apagados Apagados | $novos Novos"
  
