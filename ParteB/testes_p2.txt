@@ -524,3 +524,12 @@ Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
     -s : Emissão de alertas de alta prioridade para o sistema de logging
  usando o logger
 adrianamoranguita
+
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p /tmp/amb -f bd_nova
+cat bd_nova
+Base de dados de proteção bd_nova foi criada com sucesso.
+Ficheiros processados: 0
+Diretórios protegidas:  /tmp/amb
+modo=p bd=bd_nova logger=0 dirs= /tmp/amb exclui=
+#DIRS /tmp/amb
+#EXCLUIR 

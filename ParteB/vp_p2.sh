@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./parte_a.sh
+
 modo=""
 ficheiro_bd="/tmp/.pdb"
 usar_logger=0
@@ -72,6 +74,15 @@ if [[ $modo == "v" && ! -f "$ficheiro_bd" ]]; then
     uso
 fi
 
+
+if [[ $modo == "p" ]]; then
+    gerar_base_dados "$ficheiro_bd" "$padrao_excluir" $dirs_protegidos
+    n_ficheiros=$(grep -vc '^#' "$ficheiro_bd")
+    echo "Base de dados de proteção $ficheiro_bd foi criada com sucesso."
+    echo "Ficheiros processados: $n_ficheiros"
+    echo "Diretórios protegidas: $dirs_protegidos"
+fi
+
 apagados=0
 modificados=0
 verificados=0
@@ -139,9 +150,13 @@ if [[ $modo == "v" ]]; then
  done < "$ficheiro_bd"
  
   dirs=$(grep '^#DIRS' "$ficheiro_bd" | cut -d' ' -f2-)
+  padrao=$(grep '^#EXCLUIR' "$ficheiro_bd" | cut -d' ' -f2-)
 
   if [[ -n "$dirs" ]]; then
    while IFS= read -r ficheiro; do
+    if [[ -n "$padrao" && "$ficheiro" == $padrao ]]; then
+      continue
+    fi
     if ! grep -q -F "$ficheiro|" "$ficheiro_bd"; then
      echo "$ficheiro é NOVO"
      alerta "$ficheiro é NOVO"
@@ -154,7 +169,3 @@ if [[ $modo == "v" ]]; then
  
  
 fi
-	
-
-# Só para testar
-echo "modo=$modo bd=$ficheiro_bd logger=$usar_logger dirs=$dirs_protegidos exclui=$padrao_excluir"

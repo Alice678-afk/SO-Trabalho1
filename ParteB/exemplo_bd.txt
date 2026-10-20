@@ -1,0 +1,5 @@
+#DIRS /tmp/ambiente_teste
+#EXCLUIR 
+/tmp/ambiente_teste/ficheiro2.txt|alice-tembe|alice-tembe|26|664|1792446831|409cf2396cf4bf6754c432e094d38b4de9527c23170eeef194d7708dc7d70207
+/tmp/ambiente_teste/ficheiro1.txt|alice-tembe|alice-tembe|27|664|1792446831|3d5045bf93763283334fd836fd17d8d09f153f9b7438e7147dc0add62a9688e2
+
