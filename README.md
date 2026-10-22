@@ -7,7 +7,7 @@ O `vp` (vigia-pirata) deteta se os ficheiros de um ou mais diretórios foram alt
 | Nome | Número mecanográfico |
 |------|----------------------|
 | Adriana Martins | 132842 |
-| Alice Tembe |  |
+| Alice Tembe     | 134713 |
 
 ## Requisitos
 
