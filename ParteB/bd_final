@@ -1,9 +1,4 @@
-#DIRS /tmp/amb
+#DIRS /home/adrianamoranguita/amb_teste
 #EXCLUIR 
-/tmp/amb/c.txt|adrianamoranguita|adrianamoranguita|2|664|1792525296|a3a5e715f0cc574a73c3f9bebb6bc24f32ffd5b67b387244c2c909da779a1478
-/tmp/amb/f3.txt|adrianamoranguita|adrianamoranguita|2|664|1792525060|c865f6c5ab8d1b0bcd383a5e1e3879d22681c96bf462c269b7581d523fbe70ab
-/tmp/amb/f1.txt|adrianamoranguita|adrianamoranguita|7|664|1792525060|cb9d584672645caa386516d8085d61de1930a6f140a0c805ff98ef2e61ac2880
-/tmp/amb/d.txt|adrianamoranguita|adrianamoranguita|2|664|1792525552|8d74beec1be996322ad76813bafb92d40839895d6dd7ee808b17ca201eac98be
-/tmp/amb/e.log|adrianamoranguita|adrianamoranguita|2|664|1792525552|a2bbdb2de53523b8099b37013f251546f3d65dbe7a0774fa41af0a4176992fd4
-/tmp/amb/b.log|adrianamoranguita|adrianamoranguita|2|664|1792525106|0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f
-/tmp/amb/a.log|adrianamoranguita|adrianamoranguita|2|664|1792525088|87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7
+/home/adrianamoranguita/amb_teste/f2.txt|adrianamoranguita|adrianamoranguita|2|664|1793127118|3bb2abb69ebb27fbfe63c7639624c6ec5e331b841a5bc8c3ebc10b9285e90877
+/home/adrianamoranguita/amb_teste/f1.txt|adrianamoranguita|adrianamoranguita|2|664|1793127118|73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac

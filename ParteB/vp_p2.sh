@@ -103,6 +103,7 @@ if [[ $modo == "v" ]]; then
      alerta "$caminho foi APAGADO"
      
      echo "  Informação inicial: USER=$user, GROUP=$grupo, SIZE=$tamanho, PERM=$permissoes, SHA256=$sha256"
+     echo "  Informação atual: [Ficheiro não encontrado no sistema]"
      apagados=$((apagados + 1))
   
   else 
@@ -160,6 +161,12 @@ if [[ $modo == "v" ]]; then
     if ! grep -q -F "$ficheiro|" "$ficheiro_bd"; then
      echo "$ficheiro é NOVO"
      alerta "$ficheiro é NOVO"
+     sha256_atual=$(sha256sum "$ficheiro" | awk '{print $1}')      
+     user_atual=$(stat -c %U "$ficheiro")                         
+     grupo_atual=$(stat -c %G "$ficheiro")                       
+     tamanho_atual=$(stat -c %s "$ficheiro")                      
+     perm_atual=$(stat -c %a "$ficheiro")                          
+     echo "  Informação atual: USER=$user_atual, GROUP=$grupo_atual, SIZE=$tamanho_atual, PERM=$perm_atual, SHA256=$sha256_atual" 
      novos=$((novos + 1))
     fi
    done < <(find $dirs -type f)

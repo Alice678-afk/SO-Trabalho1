@@ -533,3 +533,93 @@ Diretórios protegidas:  /tmp/amb
 modo=p bd=bd_nova logger=0 dirs= /tmp/amb exclui=
 #DIRS /tmp/amb
 #EXCLUIR 
+
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ echo "z" > ~/amb_teste/novo.txt
+./vp_p2.sh -v -f bd_final
+/home/adrianamoranguita/amb_teste/novo.txt é NOVO
+  Informação atual: USER=adrianamoranguita, GROUP=adrianamoranguita, SIZE=2, PERM=664, SHA256=c865f6c5ab8d1b0bcd383a5e1e3879d22681c96bf462c269b7581d523fbe70ab
+Resumo da Verificação: 2 verificados | 0 Modificados | 0 Apagados | 1 Novos
+(OK)
+
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -x
+./vp_p2.sh -f
+./vp_p2.sh -p -v
+./vp_p2.sh -p
+./vp_p2.sh -v -f nao_existe
+./vp_p2.sh: illegal option -- x
+Opção inválida
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
+./vp_p2.sh: option requires an argument -- f
+Opção inválida
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
+Erro: não podes usar -p e -v ao mesmo tempo
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
+Erro: o -p precisa de pelo menos um diretório
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
+Erro: base de dados 'nao_existe' não encontrada
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p ~/amb_teste -f bd_t
+./vp_p2.sh -v -f bd_t
+./vp_p2.sh -f bd_t
+Base de dados de proteção bd_t foi criada com sucesso.
+Ficheiros processados: 3
+Diretórios protegidas:  /home/adrianamoranguita/amb_teste
+Resumo da Verificação: 3 verificados | 0 Modificados | 0 Apagados | 0 Novos
+Resumo da Verificação: 3 verificados | 0 Modificados | 0 Apagados | 0 Novos
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -p ~/amb_teste -f bd_t -e "*.log"
+echo "a" > ~/amb_teste/a.log
+echo "b" > ~/amb_teste/b.txt
+./vp_p2.sh -v -f bd_t
+Base de dados de proteção bd_t foi criada com sucesso.
+Ficheiros processados: 3
+Diretórios protegidas:  /home/adrianamoranguita/amb_teste
+/home/adrianamoranguita/amb_teste/b.txt é NOVO
+  Informação atual: USER=adrianamoranguita, GROUP=adrianamoranguita, SIZE=2, PERM=664, SHA256=0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f
+Resumo da Verificação: 3 verificados | 0 Modificados | 0 Apagados | 1 Novos
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$ ./vp_p2.sh -v -f bd_t -s
+journalctl -t vp -n 5
+/home/adrianamoranguita/amb_teste/b.txt é NOVO
+  Informação atual: USER=adrianamoranguita, GROUP=adrianamoranguita, SIZE=2, PERM=664, SHA256=0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f
+Resumo da Verificação: 3 verificados | 0 Modificados | 0 Apagados | 1 Novos
+Oct 18 23:30:38 moranguinho vp[31249]: /tmp/a.txt foi APAGADO
+Oct 18 23:30:38 moranguinho vp[31250]: /tmp/b.txt foi APAGADO
+Oct 18 23:30:38 moranguinho vp[31253]: /tmp/amb/f2.txt é NOVO
+Oct 18 23:30:38 moranguinho vp[31255]: /tmp/amb/f1.txt é NOVO
+-- Boot b882a479d8c04ec8ac39d2c87fc2ed2e --
+Oct 27 18:54:03 moranguinho vp[14522]: /home/adrianamoranguita/amb_teste/b.txt é NOVO
+adrianamoranguita@moranguinho:~/SO/trabalho1/ParteB$

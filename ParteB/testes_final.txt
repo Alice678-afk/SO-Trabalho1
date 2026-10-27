@@ -1,0 +1,11 @@
+### ./vp_p2.sh -x
+./vp_p2.sh: illegal option -- x
+Opção inválida
+Uso: ./vp [{-p <dir1> [<dir2>...] | -v}] [-f <ficheiro>] [-e <padrao>] [-s]
+    -p : Protege e guarda informação acerca de um ou mais diretórios
+    -v : Verifica alterações em ficheiros desde que foram protegidos
+    -f : Indicação do nome do ficheiro onde a base de dados será guardada (Por defeito será tmp/.pdb)
+    -e : Permite a exclusão de ficheiros voláteis (ex. *.tmp, *.log,
+ /tmp/*) da proteção e verificação
+    -s : Emissão de alertas de alta prioridade para o sistema de logging
+ usando o logger
