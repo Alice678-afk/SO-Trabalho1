@@ -1,13 +1,39 @@
 # SO-Trabalho1
 
-O `vp` (vigia-pirata) deteta se os ficheiros de um ou mais diretórios foram alterados, por exemplo por uma intrusão. No modo de proteção guarda uma base de dados com a informação original dos ficheiros, e no modo de verificação compara o estado atual com essa base de dados.
-
 ## Grupo
 
 | Nome | Número mecanográfico |
 |------|----------------------|
 | Adriana Martins | 132842 |
 | Alice Tembe     | 134713 |
+
+O `vp` (vigia-pirata) deteta se os ficheiros de um ou mais diretórios foram alterados, por exemplo por uma intrusão. No modo de proteção guarda uma base de dados com a informação original dos ficheiros, e no modo de verificação compara o estado atual com essa base de dados.
+
+## Início rápido
+
+```
+chmod +x vp
+./vp -p <diretório> -f minha_bd      # protege um diretório
+./vp -v -f minha_bd                  # verifica alterações
+```
+
+## Funcionalidades
+
+- Modo de proteção (`-p`): regista metadados e SHA-256 de todos os ficheiros dos diretórios e subdiretórios
+- Modo de verificação (`-v`, ou por defeito): deteta ficheiros novos, apagados e alterações de posse, tamanho, conteúdo, permissões e data de modificação
+- Ficheiro da base de dados à escolha (`-f`)
+- Exclusão de ficheiros por padrão (`-e`), aplicada na proteção e na verificação
+- Alertas para o sistema de logging (`-s`)
+- Mensagem de ajuda quando há erros de utilização
+
+## Resolução de problemas
+
+| Problema | Solução |
+|----------|---------|
+| `Permission denied` ao correr `./vp` | Dar permissão de execução: `chmod +x vp` |
+| `base de dados '...' não encontrada` | Criar primeiro a base de dados com `-p`, ou indicar o ficheiro certo com `-f` |
+| `No such file or directory` ao carregar o `parte_a.sh` | Correr o `vp` de dentro da pasta onde está o `parte_a.sh` (só se entregarem os dois ficheiros) |
+| Todos os ficheiros aparecem como `APAGADO` | O diretório protegido mudou de sítio ou foi apagado |
 
 ## Requisitos
 
