@@ -7,7 +7,34 @@
 | Adriana Martins | 132842 |
 | Alice Tembe     | 134713 |
 
-O `vp` (vigia-pirata) deteta se os ficheiros de um ou mais diretórios foram alterados, por exemplo por uma intrusão. No modo de proteção guarda uma base de dados com a informação original dos ficheiros, e no modo de verificação compara o estado atual com essa base de dados.
+O `vp` (Vigia-Pirata) é um programa que permite detetar alterações nos ficheiros de um ou mais diretórios, podendo identificar situações como modificações ou eliminações de ficheiros.
+
+No modo de proteção, o programa cria uma base de dados com a informação original dos ficheiros. No modo de verificação, compara o estado atual dos ficheiros com os dados guardados, identificando ficheiros novos, apagados ou modificados.
+
+## Requisitos
+
+- Linux
+- Bash
+- Comandos usados: `find`, `stat`, `sha256sum`, `grep`, `awk`, `cut` e `logger`
+- Opcional: `journalctl`, para consultar os alertas enviados com a opção `-s`
+
+## Instalação
+
+1. Copiar os ficheiros do repositório para o computador, por exemplo, com `git clone`.
+2. Garantir que o `vp` e o `parte_a.sh` estão **na mesma pasta**, porque o `vp` carrega as funções do `parte_a.sh`.
+3. Dar permissão de execução ao `vp`:
+
+```
+chmod +x vp
+```
+
+## Como correr o projeto
+
+### Sintaxe
+
+```
+./vp [-p <dir1> [<dir2>...] | -v] [-f <ficheiro>] [-e <padrao>] [-s]
+```
 
 ## Início rápido
 
@@ -34,31 +61,6 @@ chmod +x vp
 | `base de dados '...' não encontrada` | Criar primeiro a base de dados com `-p`, ou indicar o ficheiro certo com `-f` |
 | `No such file or directory` ao carregar o `parte_a.sh` | Correr o `vp` de dentro da pasta onde está o `parte_a.sh` (só se entregarem os dois ficheiros) |
 | Todos os ficheiros aparecem como `APAGADO` | O diretório protegido mudou de sítio ou foi apagado |
-
-## Requisitos
-
-- Linux
-- Bash
-- Comandos usados: `find`, `stat`, `sha256sum`, `grep`, `awk`, `cut` e `logger`
-- Opcional: `journalctl`, para consultar os alertas enviados com a opção `-s`
-
-## Instalação
-
-1. Copiar os ficheiros do repositório para o computador, por exemplo, com `git clone`.
-2. Garantir que o `vp` e o `parte_a.sh` estão **na mesma pasta**, porque o `vp` carrega as funções do `parte_a.sh`.
-3. Dar permissão de execução ao `vp`:
-
-```
-chmod +x vp
-```
-
-## Como correr o projeto
-
-### Sintaxe
-
-```
-./vp [-p <dir1> [<dir2>...] | -v] [-f <ficheiro>] [-e <padrao>] [-s]
-```
 
 ### Opções
 
