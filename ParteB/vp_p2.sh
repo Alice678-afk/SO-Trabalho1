@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source ./parte_a.sh
-
 modo=""
 ficheiro_bd="/tmp/.pdb"
 usar_logger=0
