@@ -20,20 +20,11 @@ No modo de proteção, o programa cria uma base de dados com a informação orig
 
 ## Instalação
 
-1. Copiar os ficheiros do repositório para o computador, por exemplo, com `git clone`.
-2. Garantir que o `vp` e o `parte_a.sh` estão **na mesma pasta**, porque o `vp` carrega as funções do `parte_a.sh`.
+1. Copiar o ficheiro `vp` para o computador
 3. Dar permissão de execução ao `vp`:
 
 ```
 chmod +x vp
-```
-
-## Como correr o projeto
-
-### Sintaxe
-
-```
-./vp [-p <dir1> [<dir2>...] | -v] [-f <ficheiro>] [-e <padrao>] [-s]
 ```
 
 ## Início rápido
@@ -42,6 +33,14 @@ chmod +x vp
 chmod +x vp
 ./vp -p <diretório> -f minha_bd      # protege um diretório
 ./vp -v -f minha_bd                  # verifica alterações
+```
+
+## Como correr o projeto
+
+### Sintaxe
+
+```
+./vp [-p <dir1> [<dir2>...] | -v] [-f <ficheiro>] [-e <padrao>] [-s]
 ```
 
 ## Funcionalidades
@@ -164,14 +163,10 @@ Em todos estes casos o `vp` escreve uma mensagem de erro, mostra a ajuda de uso 
 ## Estrutura do repositório
 
 ```
-SO-Trabalho1/
-├── README.md
-├── ParteA/
-│   ├── parte_a.sh      função que cria a base de dados (modo -p)
-│   ├── testar.sh       script de teste dessa função
-│   └── exemplo_bd.txt  exemplo de base de dados
-└── ParteB/
-    ├── vp_p2.sh        interface e verificação (modo -v)
-    ├── parte_a.sh      cópia da função da ParteA
-    └── testes_p2.txt   testes realizados
+entrega/
+├── vp                  programa (criação da base de dados + interface e verificação)
+├── README.md           este ficheiro
+├── relatorio.pdf       relatório do trabalho
+├── declaracao_ia.pdf   declaração de utilização de IA
+└── apresentacao        slides da apresentação oral
 ```
