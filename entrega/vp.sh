@@ -83,30 +83,16 @@ padrao_excluir=""
 # Percorre os argumentos recebidos
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        -p)
-            modo="p"
-            flag_p=1
-            shift
-            ;;
-        -v)
-            modo="v"
-            flag_v=1
-            shift
-            ;;
-        -f)
-            [[ $# -lt 2 ]] && uso
-            ficheiro_bd="$2"
-            shift 2
-            ;;
-        -e)
-            [[ $# -lt 2 ]] && uso
-            padrao_excluir="$2"
-            shift 2
-            ;;
-        -s)
-            usar_logger=1
-            shift
-            ;;
+        -p) modo="p"; flag_p=1; shift;;
+        
+        -v) modo="v"; flag_v=1; shift;;
+
+        -f)[[ $# -lt 2 ]] && uso; ficheiro_bd="$2"; shift 2;;
+        
+        -e)[[ $# -lt 2 ]] && uso; padrao_excluir="$2"; shift 2;;
+        
+        -s)usar_logger=1; shift;;
+
         --)
             shift
             while [[ $# -gt 0 ]]; do
@@ -114,14 +100,9 @@ while [[ $# -gt 0 ]]; do
                 shift
             done
             ;;
-        -*)
-            echo "Opção inválida: $1" >&2
-            uso
-            ;;
-        *)
-            dirs_protegidos+=("$1")
-            shift
-            ;;
+        -*)echo "Opção inválida: $1" >&2; uso;;
+        
+        *)dirs_protegidos+=("$1"); shift;;
     esac
 done
 
